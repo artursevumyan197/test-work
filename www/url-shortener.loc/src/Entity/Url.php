@@ -18,9 +18,21 @@ class Url
     private $id;
 
     /**
+    * @ORM\Column(type="boolean", options={"default" : 0})
+    */
+    private $sent = false;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $url;
+
+
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $domain;
 
     /**
      * @ORM\Column(type="string", length=14)
@@ -56,6 +68,12 @@ class Url
         return $this;
     }
 
+    public function setDomain(string $domain): self
+    {
+        $this->domain = $domain;
+
+        return $this;
+    }
     public function getHash(): ?string
     {
         return $this->hash;
@@ -77,6 +95,13 @@ class Url
     {
         $this->createdDate = $createdDate;
 
+        return $this;
+    }
+
+
+    public function markAsSent(): self
+    {
+        $this->sent = true;
         return $this;
     }
 }
